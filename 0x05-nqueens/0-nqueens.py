@@ -21,6 +21,7 @@ def is_safe(board, row, col):
 
     return True
 
+
 def solve_nqueens_util(board, col, solutions):
     if col >= len(board):
         solution = []
@@ -40,11 +41,13 @@ def solve_nqueens_util(board, col, solutions):
 
     return res
 
+
 def solve_nqueens(n):
     board = [[0 for _ in range(n)] for _ in range(n)]
     solutions = []
     solve_nqueens_util(board, 0, solutions)
     return solutions
+
 
 def main():
     if len(sys.argv) != 2:
@@ -64,6 +67,7 @@ def main():
     solutions = solve_nqueens(N)
     for solution in solutions:
         print(solution)
+
 
 if __name__ == "__main__":
     main()

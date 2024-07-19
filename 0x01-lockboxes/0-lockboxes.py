@@ -3,11 +3,21 @@
 
 
 def canUnlockAll(boxes):
-    """Can unlock"""
-    keychain = {0}
-    padlocks = set(range(len(boxes)))
-    for _ in boxes:
-        for padlock in padlocks:
-            if padlock in keychain:
-                keychain.update(boxes[padlock])
-    return padlocks <= keychain
+    """checks if all boxes can be unlocked"""
+    if not boxes:
+        return False
+    keychain = set([0])  # Start with the first box already unlocked
+    unlocked = set([0])  # Keep track of unlocked boxes
+
+    while True:
+        new_keys = set()
+        for key in keychain:
+            if key < len(boxes):
+                for new_key in boxes[key]:
+                    if new_key not in unlocked:
+                        new_keys.add(new_key)
+        if not new_keys:
+            break
+        keychain.update(new_keys)
+        unlocked.update(new_keys)
+    return len(unlocked) == len(boxes)
